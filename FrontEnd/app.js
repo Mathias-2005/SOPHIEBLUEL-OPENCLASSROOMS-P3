@@ -9,7 +9,7 @@ async function getWorks(filter) {
     }
     const json = await response.json();
     if (filter) {
-      let filtered = json.filter ((data) => data.categoryId === filter);
+      const filtered = json.filter ((data) => data.categoryId === filter);
       for (let i = 0; i < filtered.length; i++) {
         setFigure(filtered[i]);
       }

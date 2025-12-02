@@ -19,15 +19,13 @@ async function getLogin(event) {
     });
 
     if (response.status != 200) {
-            const errorBox = document.getElementById("error"); // ON VIENS PRENDRE LA DIV ERROR DU HTML 
-            errorBox.style.display = "block"; // ON REMOVE LE DISPLAY NONE DU HTML
-            errorBox.innerText = "Erreur dans l’identifiant ou le mot de passe"; // ON LUI IMPLEMENTE LE TEXT 
-        } else {
-            let result = await response.json();
-            const token = result.token; // CREATION VARIABLE TOKEN 
-            sessionStorage.setItem("authToken", token);
-            window.location.href = "index.html"; // REDIRIGE VERS LA PAGE D'ACCEUIL SI LOGIN AUTORISER
-        }
+        const errorBox = document.getElementById("error"); // ON VIENS PRENDRE LA DIV ERROR DU HTML 
+        errorBox.style.display = "block"; // ON REMOVE LE DISPLAY NONE DU HTML
+        errorBox.innerText = "Erreur dans l’identifiant ou le mot de passe"; // ON LUI IMPLEMENTE LE TEXT 
+    } else {
+        let result = await response.json();
+        const token = result.token; // CREATION VARIABLE TOKEN 
+        sessionStorage.setItem("authToken", token); // STOCKAGE DU TOKKEN STORAGE
+        window.location.href = "index.html"; // REDIRIGE VERS LA PAGE D'ACCEUIL SI LOGIN AUTORISER
     }
-
-//getLogin();
+}

@@ -9,7 +9,7 @@ async function getWorks(filter) {
     }
     const json = await response.json();
     if (filter) {
-      const filtered = json.filter ((data) => data.categoryId === filter);
+      const filtered = json.filter((data) => data.categoryId === filter);
       for (let i = 0; i < filtered.length; i++) {
         setFigure(filtered[i]);
       }
@@ -66,3 +66,22 @@ function setFilter(data) {
 }
 document.querySelector(".tous").addEventListener("click", () => getWorks());
 
+function editMode() {
+  if (sessionStorage.authToken) {
+    const editBanner = document.createElement("div"); // CREATION DE LA DIV EDIT BANNER 
+    editBanner.className = "edit"; // AJOUT DU CLASS NAME
+    editBanner.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>'; // AJOUT DANS LA DIV DES ELEMENTS
+    document.querySelector("body").prepend(editBanner); // AJOUT DE LA DIV DANS LE BODY AVANT
+    document.getElementById("log").innerText = "logout"; // 'LOGOUT' AU LIEU DE 'LOGIN'
+    document.getElementById("log").addEventListener("click", function () { // AU CLICK ON RELOAD LA PAGE SANS LA CONNEXION VIA LE SESSIONSTORAGE
+      sessionStorage.clear();
+      window.location.reload();
+    });
+    document.querySelector(".filtres-container").innerHTML =""; // ON RETIRE LE BOUTON 'TOUS'
+    const editProjet = document.createElement("p"); // CREATION DE LA BALISE P 
+    editProjet.innerHTML = '<p id="edit-projet"><i class="fa-regular fa-pen-to-square"></i><p><a href="#">modifier</a></p></p>'; // AJOUT DES ELEMENTS
+    document.querySelector(".edit-projets").append(editProjet); // AJOUT DE P DANS APRES .EDIT-PROJETS
+  }
+}
+// APPELLE DE LA FONCTION
+editMode();

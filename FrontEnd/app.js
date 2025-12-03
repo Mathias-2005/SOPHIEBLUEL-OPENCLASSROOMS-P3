@@ -18,6 +18,10 @@ async function getWorks(filter) {
       for (let i = 0; i < json.length; i++) {
         setFigure(json[i]);
       }
+
+      for (let i = 0; i < json.length; i++) {
+        setFigureModal(json[i]);
+      }
     }
   } catch (error) {
     console.error(error.message);
@@ -28,10 +32,10 @@ getWorks();
 
 //FUNCTION AJOUT DES TRAVAUX DEPUIS JS DYNAMIQUEMENT
 function setFigure(data) {
-  const figure = document.createElement("figure");
-  figure.innerHTML = `<img src= ${data.imageUrl} alt= ${data.title}>
-                        <figcaption>${data.title}</figcaption>`;
-  document.querySelector(".gallery").append(figure);
+  const figure = document.createElement("figure"); // CREATION DE VARIABLE 'FIGURE'
+  figure.innerHTML = `<img src= ${data.imageUrl} alt= ${data.title}> 
+                        <figcaption>${data.title}</figcaption>`; // AJOUT DES IMG + TITLE 
+  document.querySelector(".gallery").append(figure); // APPEND FIGURE DANS '.GALLERY' 
 }
 
 //METHOD FETCH POUR APPELLER L'API CATEGORIES
@@ -49,6 +53,7 @@ async function getCategories() {
     for (let i = 0; i < json.length; i++) {
       setFilter(json[i]);
     }
+
   } catch (error) {
     console.error(error.message);
   }
@@ -64,10 +69,12 @@ function setFilter(data) {
   div.innerHTML = `${data.name}`;
   document.querySelector(".filtres-container").append(div);
 }
-document.querySelector(".tous").addEventListener("click", () => getWorks());
+document.querySelector(".tous").addEventListener("click", () => getWorks()); // AU CLICK DE 'TOUS' APPEL DE GETWORKS()
 
+// FUNCTION EDITIONMODE SI LOGIN AUTORISER
 function editMode() {
   if (sessionStorage.authToken) {
+    
     const editBanner = document.createElement("div"); // CREATION DE LA DIV EDIT BANNER 
     editBanner.className = "edit"; // AJOUT DU CLASS NAME
     editBanner.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>'; // AJOUT DANS LA DIV DES ELEMENTS
@@ -77,8 +84,10 @@ function editMode() {
       sessionStorage.clear();
       window.location.reload();
     });
-    document.querySelector(".filtres-container").innerHTML = ""; // ON RETIRE LE BOUTON 'TOUS'
+
+    document.querySelector(".filtres-container").style.display = "none" // ON FAIT DISPARAITRE LES FILTRES
     const editProjet = document.createElement("p"); // CREATION DE LA BALISE P 
+    editProjet.className = "open-modal";
     editProjet.innerHTML = '<p id="edit-projet"><i class="fa-regular fa-pen-to-square"></i><p><a href="#">modifier</a></p></p>'; // AJOUT DES ELEMENTS
     document.querySelector(".edit-projets").append(editProjet); // AJOUT DE P DANS APRES .EDIT-PROJETS
     openModal(); // APPELLE DE LA FONCTION SI EDIT MODE ACTIF
@@ -86,21 +95,38 @@ function editMode() {
 }
 editMode(); // APPELLE DE LA FONCTION
 
+// FUNCTION OUVRIR LA MODAL 
 function openModal() {
-  document.querySelector(".edit-projets").addEventListener("click", function () {
+  document.querySelector(".open-modal").addEventListener("click", function () { // AU CLICK DE 'MODIFIER' ON AFFICHE L'OVERLAY GRIS + MODALE
     document.querySelector(".overlay").style.display = "block";
     document.querySelector(".modal").style.display = "block";
+  
+    document.body.classList.add("no-scroll"); // ON AJOUTE LE HIDDEN SCROLL BAR DU BODY QUAND MODAL OPEN
   });
 }
 
+// FUNCTION FERMER LA MODAL 
 function closeModal() {
-  document.querySelector(".modal-close").addEventListener("click", function () {
+  document.querySelector(".modal-close").addEventListener("click", function () { // AU CLICK DE 'CROIX' ON RETIRE L'OVERLAY GRIS + MODALE
     document.querySelector(".overlay").style.display = "none";
     document.querySelector(".modal").style.display = "none";
+
+    document.body.classList.remove("no-scroll"); // ON RETIRE LE HIDDEN SCROLL BAR DU BODY
   });
-  document.querySelector(".overlay").addEventListener("click", function () {
+  document.querySelector(".overlay").addEventListener("click", function () { // AU CLICK DE 'OVERLAY' ON RETIRE L'OVERLAY GRIS + MODALE
     document.querySelector(".overlay").style.display = "none";
     document.querySelector(".modal").style.display = "none";
+
+    document.body.classList.remove("no-scroll"); // ON RETIRE LE HIDDEN SCROLL BAR DU BODY
   });
 }
 closeModal(); // APPELLE DE LA FONCTION
+
+//FUNCTION AJOUT DES TRAVAUX DEPUIS JS DYNAMIQUEMENT
+function setFigureModal(data) {
+  figure = document.createElement("figure"); 
+  figure.innerHTML = `<img src= ${data.imageUrl} alt= ${data.title}>`; // AJOUT DES IMG 
+  figure.className = ("modal-figure"); // AJOUT D'UNE CLASSNAME '.'
+  document.querySelector(".gallery-modal").append(figure); // APPEND FIGURE DANS '.GALLERY-MODAL' 
+}
+

@@ -1,7 +1,7 @@
 //METHOD FETCH POUR APPELLER L'API TRAVAUX
 async function getWorks(filter) {
   document.querySelector(".gallery").innerHTML = "";
-  const url = "http://localhost:5678/api/works";
+  const url = "http://localhost:5678/api/works"; // CREATION DE VARIABLE POUR URL DE l'API
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -36,7 +36,7 @@ function setFigure(data) {
 
 //METHOD FETCH POUR APPELLER L'API CATEGORIES
 async function getCategories() {
-  const url = "http://localhost:5678/api/categories";
+  const url = "http://localhost:5678/api/categories"; // CREATION DE VARIABLE POUR URL DE l'API
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -77,11 +77,30 @@ function editMode() {
       sessionStorage.clear();
       window.location.reload();
     });
-    document.querySelector(".filtres-container").innerHTML =""; // ON RETIRE LE BOUTON 'TOUS'
+    document.querySelector(".filtres-container").innerHTML = ""; // ON RETIRE LE BOUTON 'TOUS'
     const editProjet = document.createElement("p"); // CREATION DE LA BALISE P 
     editProjet.innerHTML = '<p id="edit-projet"><i class="fa-regular fa-pen-to-square"></i><p><a href="#">modifier</a></p></p>'; // AJOUT DES ELEMENTS
     document.querySelector(".edit-projets").append(editProjet); // AJOUT DE P DANS APRES .EDIT-PROJETS
+    openModal(); // APPELLE DE LA FONCTION SI EDIT MODE ACTIF
   }
 }
-// APPELLE DE LA FONCTION
-editMode();
+editMode(); // APPELLE DE LA FONCTION
+
+function openModal() {
+  document.querySelector(".edit-projets").addEventListener("click", function () {
+    document.querySelector(".overlay").style.display = "block";
+    document.querySelector(".modal").style.display = "block";
+  });
+}
+
+function closeModal() {
+  document.querySelector(".modal-close").addEventListener("click", function () {
+    document.querySelector(".overlay").style.display = "none";
+    document.querySelector(".modal").style.display = "none";
+  });
+  document.querySelector(".overlay").addEventListener("click", function () {
+    document.querySelector(".overlay").style.display = "none";
+    document.querySelector(".modal").style.display = "none";
+  });
+}
+closeModal(); // APPELLE DE LA FONCTION

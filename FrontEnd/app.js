@@ -103,6 +103,7 @@ function openModal() {
   
     document.body.classList.add("no-scroll"); // ON AJOUTE LE HIDDEN SCROLL BAR DU BODY QUAND MODAL OPEN
   });
+  ModalAddWorks();
 }
 
 // FUNCTION FERMER LA MODAL 
@@ -130,3 +131,11 @@ function setFigureModal(data) {
   document.querySelector(".gallery-modal").append(figure); // APPEND FIGURE DANS '.GALLERY-MODAL' 
 }
 
+function ModalAddWorks () {
+  document.getElementById("openAddWorks").addEventListener("click", function () {
+    document.querySelector(".overlay").style.display = "block";
+    document.querySelector(".modal").style.display = "none";
+    document.querySelector(".modal-add").style.display = "block";
+  })
+  document.body.classList.add("no-scroll"); // ON AJOUTE LE HIDDEN SCROLL BAR DU BODY QUAND MODAL OPEN
+}

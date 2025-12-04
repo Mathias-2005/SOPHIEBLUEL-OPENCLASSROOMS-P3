@@ -54,31 +54,6 @@
 			<div class="modal">
 				<div class="modal-header">
 					<div class="modal-close">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-							id="close" stroke="currentColor" class="size-6">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"
-								id="close-modal" />
-						</svg>
-					</div>
-					<h3 id="title-modal">Galerie photo<h3>
-				</div>
-				<div class="modal-body">
-					<div class="gallery-modal">
-
-					</div>
-					<hr>
-				</div>
-				<div class="modal-footer">
-					<input class="modal-footer-btn" id="openAddWorks" type="submit" value="Ajouter une photo">
-				</div>
-			</div>
-		</section>
-		<!-- MODAL AJOUT PHOTO -->
-		<section id="modal-photo">
-			<div class="overlay"></div>
-			<div class="modal-add">
-				<div class="modal-header">
-					<div class="modal-close">
 						<svg xmlns="http://www.w3.org/2000/svg" id="arrow-left" fill="none" viewBox="0 0 24 24"
 							stroke-width="1.5" stroke="currentColor" class="size-6">
 							<path stroke-linecap="round" stroke-linejoin="round"
@@ -86,11 +61,10 @@
 						</svg>
 						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
 							id="close" stroke="currentColor" class="size-6">
-							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"
-								id="close-modal" />
+							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
 						</svg>
 					</div>
-					<h3 id="title-modal">Ajout photo<h3>
+					<h3 id="title-modal">Galerie photo<h3>
 				</div>
 				<div class="modal-body">
 					<div class="add-works">
@@ -109,16 +83,21 @@
 							<input type="text" name="title" id="titre">
 							<label for="categorie">Categorie</label>
 							<select name="categorie" id="categorie"></select>
-							<svg xmlns="http://www.w3.org/2000/svg" id="down-categorie" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-								stroke="currentColor" class="size-6">
+							<svg xmlns="http://www.w3.org/2000/svg" id="down-categorie" fill="none" viewBox="0 0 24 24"
+								stroke-width="1.5" stroke="currentColor" class="size-6">
 								<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
 							</svg>
 						</form>
 					</div>
+					<div class="gallery-container">
+						<div class="gallery-modal">
+
+						</div>
+					</div>
 					<hr>
 				</div>
 				<div class="modal-footer">
-					<input class="modal-footer-btn" id="test" type="submit" value="Valider">
+					<input class="modal-footer-btn" id="open-add-works" type="submit" value="Ajouter une photo">
 				</div>
 			</div>
 		</section>

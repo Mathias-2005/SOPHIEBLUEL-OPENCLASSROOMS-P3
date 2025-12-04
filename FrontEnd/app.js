@@ -74,7 +74,7 @@ document.querySelector(".tous").addEventListener("click", () => getWorks()); // 
 // FUNCTION EDITIONMODE SI LOGIN AUTORISER
 function editMode() {
   if (sessionStorage.authToken) {
-    
+
     const editBanner = document.createElement("div"); // CREATION DE LA DIV EDIT BANNER 
     editBanner.className = "edit"; // AJOUT DU CLASS NAME
     editBanner.innerHTML = '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>'; // AJOUT DANS LA DIV DES ELEMENTS
@@ -100,15 +100,21 @@ function openModal() {
   document.querySelector(".open-modal").addEventListener("click", function () { // AU CLICK DE 'MODIFIER' ON AFFICHE L'OVERLAY GRIS + MODALE
     document.querySelector(".overlay").style.display = "block";
     document.querySelector(".modal").style.display = "block";
-  
+    document.querySelector(".add-works").style.display = "none";
+    document.getElementById("title-modal").innerHTML = "Galerie photo";
+    document.getElementById("open-add-works").value = "Ajouter une photo";
+    document.querySelector(".gallery-container").style.display = "block";
+    document.getElementById("arrow-left").style.display = "none";
+    document.getElementById("open-add-works").style.backgroundColor = "#1D6154";
+
     document.body.classList.add("no-scroll"); // ON AJOUTE LE HIDDEN SCROLL BAR DU BODY QUAND MODAL OPEN
   });
-  ModalAddWorks();
+  ModalAddWorks(); // APELLE DE LA FONCTION
 }
 
 // FUNCTION FERMER LA MODAL 
 function closeModal() {
-  document.querySelector(".modal-close").addEventListener("click", function () { // AU CLICK DE 'CROIX' ON RETIRE L'OVERLAY GRIS + MODALE
+  document.getElementById("close").addEventListener("click", function () { // AU CLICK DE 'CROIX' ON RETIRE L'OVERLAY GRIS + MODALE
     document.querySelector(".overlay").style.display = "none";
     document.querySelector(".modal").style.display = "none";
 
@@ -125,17 +131,35 @@ closeModal(); // APPELLE DE LA FONCTION
 
 //FUNCTION AJOUT DES TRAVAUX DEPUIS JS DYNAMIQUEMENT
 function setFigureModal(data) {
-  figure = document.createElement("figure"); 
+  figure = document.createElement("figure");
   figure.innerHTML = `<img src= ${data.imageUrl} alt= ${data.title}>`; // AJOUT DES IMG 
   figure.className = ("modal-figure"); // AJOUT D'UNE CLASSNAME '.'
   document.querySelector(".gallery-modal").append(figure); // APPEND FIGURE DANS '.GALLERY-MODAL' 
 }
 
-function ModalAddWorks () {
-  document.getElementById("openAddWorks").addEventListener("click", function () {
-    document.querySelector(".overlay").style.display = "block";
-    document.querySelector(".modal").style.display = "none";
-    document.querySelector(".modal-add").style.display = "block";
+// FUNCTION OUVRIR LA MODAL ADD WORKS
+function ModalAddWorks() {
+  document.getElementById("open-add-works").addEventListener("click", function () { // AU CLICK DU 'BTN' AJOUT DE LA MODALADDWORKS
+    document.querySelector(".gallery-container").style.display = "none";
+    document.getElementById("title-modal").innerHTML = "Ajout photo";
+    document.getElementById("open-add-works").value = "Valider";
+    document.querySelector(".add-works").style.display = "block";
+    document.getElementById("arrow-left").style.display = "block";
+    document.getElementById("open-add-works").style.backgroundColor = "#A7A7A7";
   })
-  document.body.classList.add("no-scroll"); // ON AJOUTE LE HIDDEN SCROLL BAR DU BODY QUAND MODAL OPEN
+};
+
+// FUNCTION SWITCH LES DEUX MODAL
+function switchModal () {
+  document.getElementById("arrow-left").addEventListener("click", function () { // AU CLICK DE 'ARROW-LEFT' MODAL REAPPARAIT/MODALADDWORKS DISPARAIT
+    document.querySelector(".modal").style.display = "block";
+
+    document.getElementById("title-modal").innerHTML = "Galerie photo";
+    document.getElementById("open-add-works").value = "Ajouter une photo";
+    document.querySelector(".add-works").style.display = "none";
+    document.querySelector(".gallery-container").style.display = "block";
+    document.getElementById("arrow-left").style.display = "none";
+    document.getElementById("open-add-works").style.backgroundColor = "#1D6154";
+  })
 }
+switchModal(); // APPELLE DE LA FONCTION

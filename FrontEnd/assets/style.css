@@ -420,6 +420,11 @@ p a {
 	cursor: pointer;
 }
 
+.modal-figure img:hover {
+	transition: transform 0.3s ease;
+	transform: scale(1.05);
+}
+
 .modal-body hr {
 	width: 420px;
 	margin-top: 30px;
@@ -484,7 +489,13 @@ p a {
 
 .gallery img {
 	width: 100%;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
 
+.gallery img:hover {
+	transition: transform 0.3s ease;
+	transform: scale(1.02);
 }
 
 #contact {
